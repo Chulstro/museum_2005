@@ -2,6 +2,7 @@ require './lib/museum'
 require './lib/patron'
 require './lib/exhibit'
 require 'minitest/autorun'
+require 'mocha/minitest'
 
 class MuseumTest < Minitest::Test
 
@@ -67,6 +68,8 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_1)
     @dmns.admit(@patron_2)
     @dmns.admit(@patron_3)
+    dmns_1 = mock("museum")
+    dmns_1.stubs(:announce_lottery_winner).returns("Johnny")
 
     expected_interested = {
       "Gems and Minerals" => [@patron_1],
@@ -76,7 +79,7 @@ class MuseumTest < Minitest::Test
 
     assert_equal expected_interested, @dmns.patrons_by_exhibit_interest
     assert_equal [@patron_1, @patron_3], @dmns.lottery_ticket_contestants(@dead_sea_scrolls)
-    # assert_equal "Bob" || "Johnny", @dmns.draw_lottery_winner(@dead_sea_scrolls)
+    assert_equal "Johnny", dmns_1.draw_lottery_winner(@dead_sea_scrolls)
     assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
     assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@gems_and_minerals)
   end
