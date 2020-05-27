@@ -58,4 +58,6 @@ class Museum
         "#{draw_lottery_winner(exhibit)} has won the #{exhibit.name} exhibition lottery"
       end
     end
+
+    def
 end

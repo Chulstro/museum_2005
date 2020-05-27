@@ -69,7 +69,8 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_2)
     @dmns.admit(@patron_3)
     dmns_1 = mock("museum")
-    dmns_1.stubs(:announce_lottery_winner).returns("Johnny")
+    dmns_1.stubs(:draw_lottery_winner).returns("Johnny")
+    dmns_1.stubs(:announce_lottery_winner).returns("Bob has won the IMAX exhibit lottery")
 
     expected_interested = {
       "Gems and Minerals" => [@patron_1],
@@ -81,6 +82,7 @@ class MuseumTest < Minitest::Test
     assert_equal [@patron_1, @patron_3], @dmns.lottery_ticket_contestants(@dead_sea_scrolls)
     assert_equal "Johnny", dmns_1.draw_lottery_winner(@dead_sea_scrolls)
     assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
+    assert_equal "Bob has won the IMAX exhibit lottery", dmns_1.announce_lottery_winner(@imax)
     assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@gems_and_minerals)
   end
 end
