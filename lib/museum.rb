@@ -42,4 +42,20 @@ class Museum
     end
     patrons
   end
+
+  def draw_lottery_winner(exhibit)
+    if lottery_ticket_contestants(exhibit).count > 0
+      lottery_ticket_contestants(exhibit).sample.name
+    else
+      nil
+    end
+  end
+
+    def announce_lottery_winner(exhibit)
+      if draw_lottery_winner(exhibit) == nil
+        "No winners for this lottery"
+      else
+        "#{draw_lottery_winner(exhibit)} has won the #{exhibit.name} exhibition lottery"
+      end
+    end
 end
