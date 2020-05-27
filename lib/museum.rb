@@ -1,15 +1,17 @@
 
 class Museum
-  attr_reader :name, :exhibits, :patrons
+  attr_reader :name, :exhibits, :patrons, :exhibits_by_name
 
   def initialize(name)
     @name = name
     @exhibits = []
     @patrons =[]
+    @exhibits_by_name = {}
   end
 
   def add_exhibit(exhibit)
     @exhibits << exhibit
+    @exhibits_by_name[exhibit.name] = exhibit
   end
 
   def recommend_exhibits(patron)
@@ -58,6 +60,4 @@ class Museum
         "#{draw_lottery_winner(exhibit)} has won the #{exhibit.name} exhibition lottery"
       end
     end
-
-    def
 end

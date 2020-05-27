@@ -27,8 +27,17 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_1)
   end
 
-  def test_it_can_reduce_money
-    assert_equal 7, @tj.spending_money
-    assert_equal 0, @patron_1.spending_money
+  def test_it_can_group_name_with_exhibit
+    expected = {
+      "Gems and Minerals" => @gems_and_minerals,
+      "Dead Sea Scrolls" => @dead_sea_scrolls,
+      "IMAX" => @imax
+    }
+    assert_equal expected, @dmns.exhibits_by_name
   end
+
+  # def test_it_can_reduce_money
+  #   assert_equal 7, @tj.spending_money
+  #   assert_equal 0, @patron_1.spending_money
+  # end
 end
